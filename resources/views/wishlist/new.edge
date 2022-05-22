@@ -1,0 +1,26 @@
+@layout("app")
+
+@section("page")
+<div>
+    <h3 class="wishlist-keyword">New Wishlist</h3>
+    <wishlist>
+        @if(flashMessages.has('errors.keyword'))
+            <p class="error-text">
+                {{flashMessages.get("errors.keyword")}}
+            </p>
+        @endif
+        @if(flashMessages.has('notification'))
+            <p class="info-text">
+                {{flashMessages.get("notification")}}
+            </p>
+        @endif
+        <form action="/wishlists/search" method="POST">
+            {{ csrfField() }}
+            <label for="keyword">Title</label>
+            <input type="text" value="{{wishlist.keyword || ''}}" name="keyword">
+            <button type="submit">Search</button>
+        </form>
+       
+    </wishlist>
+</div>
+@endsection

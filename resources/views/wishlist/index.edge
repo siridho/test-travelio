@@ -1,0 +1,42 @@
+@layout("app")
+
+@section("page")
+
+<section class="hero">
+    <div class="row">
+        <div class="column">  
+            <h3 class="title"> Welcome to newsie! </h3>
+            <p class="subtitle">
+                Positive news across the world.
+            </p>
+        </div>
+        <div class="column center">
+            <img src="/images/smiley.png" style="width:150px;height:150px;margin:auto;" class="column"/>
+        </div>
+
+    </div>
+</section>
+
+
+<div class="row row-wrap">
+    @each(wishlist in wishlists)
+    <div class="column column-50">
+            <aside class="card">
+                @if(auth.user)
+                <a href="/wishlists/{{wishlist.id}}/edit" class="wishlist-meta-small">edit</a>
+                @endif
+                <h3>
+                    <a href="{{ route('WishlistsController.show', {id: wishlist.slug}) }}">
+                    {{ wishlist.title }}
+                    </a>
+                </h3>
+                <p class="wishlist-meta">Updated: {{wishlist.publishDate}}</p>
+
+                <p>
+                    {{{ wishlist.bookTitle }}}
+                </p>
+            </aside>    
+    </div>
+    @endeach
+</div>
+@endsection
